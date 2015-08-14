@@ -1,6 +1,11 @@
-﻿//FRANCAIS
+//tables de traductions
+
+
+//=================== FRANCAIS ================
 {
+
 var frTable = [];
+
 //0
 frTable.push("fr");
 //1
@@ -26,7 +31,7 @@ frTable.push("Il faut d'abord sélectionner le calque");
 //11
 frTable.push("Vous devez d'abord sélectionner le calque où placer le contrôleur");
 //12
-frTable.push("Veuillez sélectionner la propriété où appliquer le wiggle");
+frTable.push("Veuillez sélectionner le calque où appliquer le wiggle");
 //13
 frTable.push("veuillez sélectionner le coin où créer un Bone");
 //14
@@ -234,7 +239,7 @@ frTable.push("IK");
 //115
 frTable.push("Goal");
 //116
-frTable.push("Controleurs");
+frTable.push("Controleur");
 //117
 frTable.push("Bones");
 //118
@@ -274,7 +279,7 @@ frTable.push("Control Cam");
 //135
 frTable.push("Cam relief");
 //136
-frTable.push("Setup");
+frTable.push("Rigging");
 //137
 frTable.push("IK / FK");
 //138
@@ -283,106 +288,12 @@ frTable.push("FK Haut");
 frTable.push("FK Bas");
 //140
 frTable.push("FK Bout");
-//141
-frTable.push("IK 3D");
-//142
-frTable.push("Auto-Rig");
-//143
-frTable.push("Choix des calques :");
-//144
-frTable.push("Tête");
-//145
-frTable.push("Cou");
-//146
-frTable.push("Corps");
-//147
-frTable.push("Bassin");
-//148
-frTable.push("Bras G");
-//149
-frTable.push("Avant-Bras G");
-//150
-frTable.push("Main G");
-//151
-frTable.push("Bras D");
-//152
-frTable.push("Avant-Bras D");
-//153
-frTable.push("Main D");
-//154
-frTable.push("Cuisse G");
-//155
-frTable.push("Mollet G");
-//156
-frTable.push("Pied G");
-//157
-frTable.push("Cuisse D");
-//158
-frTable.push("Mollet D");
-//159
-frTable.push("Pied D");
-//160
-frTable.push("Options :");
-//161
-frTable.push("IK sur le dos");
-//162
-frTable.push("IK sur le cou");
-//163
-frTable.push("Stretch");
-//164
-frTable.push("FK sur IK");
-//165
-frTable.push("Type :");
-//166
-frTable.push("Solide");
-//167
-frTable.push("Nul");
-//168
-frTable.push("Taille :");
-//169
-frTable.push("Taille :");
-//170
-frTable.push("Taille Auto");
-//171
-frTable.push("Petite");
-//172
-frTable.push("Moyenne");
-//173
-frTable.push("Grande");
-//174
-frTable.push("Horizontal");
-//175
-frTable.push("Courbe");
-//176
-frTable.push("Mouvement :");
-//177
-frTable.push("Général");
-//178
-frTable.push("Epaules");
-//179
-frTable.push("Sans simulation - Léger");
-//180
-frTable.push("Avec simulation - Lent à calculer");
-//181
-frTable.push("Lorsque le rebond est utilisé sur la position d'un calque,");
-//182
-frTable.push("il y a deux façons de le calculer :");
-//183
-frTable.push("Nécessite une animation sur le calque pour fonctionner.");
-//184
-frTable.push("Fonctionne même sans animation sur le calque, avec le mouvement des parents.");
-//185
-frTable.push("L'animation obtenue peut aussi être meilleure.");
-//186
-frTable.push("Inverser");
-//187
-frTable.push("Couleur :");
-//188
-frTable.push("Multiplan 2D");
 }
-//ENGLISH
+
+//=================== ENGLISH ================
 {
 var enTable = [];
+
 //0
 enTable.push("en");
 //1
@@ -408,7 +319,7 @@ enTable.push("Select the layer before applying IK Goal");
 //11
 enTable.push("Select a layer before creating a controller");
 //12
-enTable.push("Select the property where to apply the \"wiggle\" function");
+enTable.push("Select the layer where to apply the \"wiggle\" function");
 //13
 enTable.push("Select a pin to create a bone");
 //14
@@ -616,7 +527,7 @@ enTable.push("IK");
 //115
 enTable.push("Goal");
 //116
-enTable.push("Controllers");
+enTable.push("Controler");
 //117
 enTable.push("Bones");
 //118
@@ -665,110 +576,17 @@ enTable.push("Upper FK");
 enTable.push("Lower FK");
 //140
 enTable.push("End FK");
-//141
-enTable.push("3D IK");
-//142
-enTable.push("Auto-Rig");
-//143
-enTable.push("Layers :");
-//144
-enTable.push("Head");
-//145
-enTable.push("Neck");
-//146
-enTable.push("Body");
-//147
-enTable.push("Pelvis");
-//148
-enTable.push("L Arm");
-//149
-enTable.push("L Forearm");
-//150
-enTable.push("L Hand");
-//151
-enTable.push("R Arm");
-//152
-enTable.push("R Forearm");
-//153
-enTable.push("R Hand");
-//154
-enTable.push("L Thigh");
-//155
-enTable.push("L Calf");
-//156
-enTable.push("L Foot");
-//157
-enTable.push("R Thigh");
-//158
-enTable.push("R Calf");
-//159
-enTable.push("R Foot");
-//160
-enTable.push("Options :");
-//161
-enTable.push("IK on the body");
-//162
-enTable.push("IK on the neck");
-//163
-enTable.push("Stretch");
-//164
-enTable.push("FK over IK");
-//165
-enTable.push("Type :");
-//166
-enTable.push("Solid");
-//167
-enTable.push("Null");
-//168
-enTable.push("Size :");
-//169
-enTable.push("Size :");
-//170
-enTable.push("Auto size");
-//171
-enTable.push("Small");
-//172
-enTable.push("Medium");
-//173
-enTable.push("Big");
-//174
-enTable.push("Horizontal");
-//175
-enTable.push("Curved");
-//176
-enTable.push("Movement:");
-//177
-enTable.push("Master");
-//178
-enTable.push("shoulders");
-//179
-enTable.push("Without simulation - Light");
-//180
-enTable.push("Simulated - Heavy computing");
-//181
-enTable.push("When the Spring is used on the position property of a layer,");
-//182
-enTable.push("there are two ways to compute it:");
-//183
-enTable.push("Needs an animation on the layer itself to work.");
-//184
-enTable.push("Works even if there is no animation on the layer, using the movement of the parent layers.");
-//185
-enTable.push("Resulting animation may be smoother too.");
-//186
-enTable.push("Reverse");
-//187
-enTable.push("Color:");
-//188
-enTable.push("2D Multiplane");
 }
-//DEUTSCH
+
+//=================== DEUTSCH ================
 {
+
 var deTable = [];
+
 //0
-deTable.push ("de");
+deTable.push("de");
 //1
-deTable.push("Bitte wählen Sie \"Scripten erlauben Dateien schreiben ... \" in dem folgenden Dialog und starten Sie Duik neu.");
+deTable.push("Bitte wählen Sie \"Scripte können Dateien zu schreiben ... \" in dem folgenden Dialog und starten Duik neu.");
 //2
 deTable.push("Eine neue Version von Duik ist verfügbar,\nbesuchen Sie http://ik.duduf.com für den Download ");
 //3
@@ -776,29 +594,29 @@ deTable.push("Kann keine Updates von Duik checken, \nkann nicht die Versionsnumm
 //4
 deTable.push("Kann keine Updates von Duik überprüfen,\nkeine Verbindung zu www.duduf.com");
 //5
-deTable.push("IK an einem einzeln Bone (LookAt) ist (noch) nicht auf 3D-Ebenen verfügbar");
+deTable.push("IK an einem einzeln bone (LookAt) ist (noch) nicht auf 3D-Ebenen verfügbar");
 //6
-deTable.push("Achten Sie darauf, dass ALLE Ebenen 3D- oder 2D-Ebenen sind, nicht beides");
+deTable.push("Achten Sie darauf, das ALLE Ebenen 3D-oder 2D-Ebenen sind, nicht beides");
 //7
-deTable.push("Vor dem Erstellen von IK 'Bone' und Controller auswählen");
+deTable.push("Vor dem erstellen von IK, 'bone' und Controller aus wählen");
 //8
-deTable.push("Überprüfen Sie, dass die Ebenen nicht die gleichen Namen haben");
+deTable.push("Überprüfen Sie, das die Ebenen nicht gleiche Namen haben");
 //9
-deTable.push("Wählen Sie zuerst den 'Bone' des Endes, dann den des Ursprungs, dann den Controller; in genau dieser Reihenfolge");
+deTable.push("Wählen Sie zuerst den 'bone' des Endes, zweitens, den des Ursprung, dann den Controller, in genau dieser Reihenfolge");
 //10
-deTable.push("Wähle vor der Anwendung von IK Goal eine Ebene aus");
+deTable.push("Vor der Anwendung von IK Goal, Wähle eine Ebene aus");
 //11
-deTable.push("Wähle vor der Erstellung eines Controllers eine Ebene aus");
+deTable.push("Vor der Erstellung eines Controllers, Wähle eine Ebene aus");
 //12
-deTable.push("Property auswählen um \"wiggle\" anzuwenden");
+deTable.push("Ebene auswählen um \"wiggle\" anzuwenden");
 //13
-deTable.push("Pin auswählen um einen 'Bone' zu erstellen");
+deTable.push("Pin auswählen, um einen 'bone' zu erstellen");
 //14
-deTable.push("Wenn Sie Hilfe benötigen, gehen Sie zu \n\nhttp://ik.duduf.com\n\n\noder schicken eine Email an duduf@duduf.com\n\nUI Design von Zeg\n\n3D IK mit der Hilfe von Eric Epstein\n\nImages in dem Script mit der Hilfe von Kevin Schires");
+deTable.push("Wenn Sie Hilfe benötigen, gehen Sie zu \n\nhttp://ik.duduf.com\n\n\noder schicken eine Email an duduf@duduf.com\n\nUI Design von Zeg\n\n3D IK mit der Hilfe von Eric Epstein\n\nImages in dem script selbst mit der Hilfe von Kevin Schires");
 //15
-deTable.push("Wähle zwei Ebenen aus um die Entfernung zu messen");
+deTable.push("Wähle zwei Ebenen aus, um die Entfernung zu messen !");
 //16
-deTable.push("Die beiden Ebenen sind an der gleichen Stelle");
+deTable.push("Die beiden Ebenen sind an der gleichen Stelle ");
 //17
 deTable.push("Die Entfernung ist");
 //18
@@ -824,7 +642,7 @@ deTable.push("Abstand der Kameras");
 //28
 deTable.push("Erstelle einen Morph");
 //29
-deTable.push("Linsen-Controller");
+deTable.push("Linsen Controller");
 //30
 deTable.push("Intensität");
 //31
@@ -836,7 +654,7 @@ deTable.push("Wähle die Ebenen der Blendenflecke vom Zentrum aus");
 //34
 deTable.push("Entfernung Link");
 //35
-deTable.push("Min Distanz");
+deTable.push(" Min Distanz");
 //36
 deTable.push("Max Distanz");
 //37
@@ -866,11 +684,11 @@ deTable.push("Kein Effekt ausgewählt");
 //49
 deTable.push("Keine Ebene ausgewählt");
 //50
-deTable.push("Ebene auswählen, um Zero anzuwenden");
+deTable.push("Ebene auswählen, um zero anzuwenden");
 //51
-deTable.push("Ebene zum Umbenennen auswählen");
+deTable.push("Ebene zum umbenennen auswählen");
 //52
-deTable.push("Oszillation");
+deTable.push("Oscillation");
 //53
 deTable.push("Amplitude");
 //54
@@ -886,13 +704,13 @@ deTable.push("Anim Exposure");
 //59
 deTable.push("Exposure nicht möglich");
 //60
-deTable.push("Bitte wählen Sie einen Effekt bei der Anwendung von Expo Anim aus");
+deTable.push("Bitte wählen Sie einen Effekt bei der Anwendung von Expo anim aus");
 //61
 deTable.push("Verfolgungspfad");
 //62
 deTable.push("Resultat");
 //63
-deTable.push("Radius?");;
+deTable.push("Radius ?");
 //64
 deTable.push("Radradius in Pixeln");
 //65
@@ -920,11 +738,11 @@ deTable.push("Voreinstellungen");
 //76
 deTable.push("Sprache");
 //77
-deTable.push("Beim Starten auf Updates überprüfen");
+deTable.push("Beim starten auf Updates überprüfen");
 //78
-deTable.push("Duik ist auf dem neuesten Stand");
+deTable.push("Duik ist aktuell");
 //79
-deTable.push("Die ausgewählte Ebene behält ihre Orientierung, trotz Veränderung des 'Parent'");
+deTable.push("Die ausgewählte Ebene behält seine Orientation, trotz Veränderung des 'parent'");
 //80
 deTable.push("Frontansicht");
 //81
@@ -932,7 +750,7 @@ deTable.push("Rechte Ansicht");
 //82
 deTable.push("Erstellt ein Null-Objekt am Ankerpunkt der ausgewählten Ebene");
 //83
-deTable.push("Erstellt einen 'Bone' für einem Marionnetten Pin");
+deTable.push("Erstellt einen 'bone' für einem Marionnetten Pin");
 //84
 deTable.push("Erstellt ein \"Zero\" Objekt für eine Ebene");
 //85
@@ -942,17 +760,17 @@ deTable.push("Annäherung");
 //87
 deTable.push("Entfernen");
 //88
-deTable.push("Ease-In Einfluss");
+deTable.push("Ease In Einfluss");
 //89
-deTable.push("Ease-Out Einfluss");
+deTable.push("Ease Out Einfluss");
 //90
 deTable.push("Morpher erstellen");
 //91
-deTable.push("Keyframes erstellen");
+deTable.push("Keyframes  erstellen");
 //92
-deTable.push("Erstellen Sie eine Wiggle Funktion (Wackeln) einer Eigenschaft des ausgewählten Ebene");
+deTable.push("Erstellen Sie eine Wiggle Funktion (wackeln) einer Eigenschaft des ausgewählten Ebene");
 //93
-deTable.push("Erstelle eine Oszillation mit ausgewählten Eigenschaft");
+deTable.push("Erstelle eine Ocillation mit ausgewählten Eigenschaft");
 //94
 deTable.push("Ändere die Exposure der Animation der ausgewählten Eigenschaft");
 //95
@@ -972,199 +790,106 @@ deTable.push("Ebenen umbenennen");
 //102
 deTable.push("Erstellt Animations-Controller für eine Kamera");
 //103
-deTable.push("Erstellt Controller für eine 3D-Kamera");
+deTable.push("Erstellt Controller für eine 3D Kamera");
 //104
 deTable.push("Neue Linie: CTRL + Enter");
 //105
-deTable.push ("Radius");
+deTable.push("Radius");
 //106
-deTable.push ("Messen");
+deTable.push("Measure");
 //107
-deTable.push ("Präfix");
+deTable.push("Prefix");
 //108
-deTable.push ("Name");
+deTable.push("Name");
 //109
-deTable.push ("Suffix");
+deTable.push("Suffix");
 //110
-deTable.push ("Zahl aus");
+deTable.push("Number from");
 //111
-deTable.push ("Umbenennen");
+deTable.push("Rename");
 //112
-deTable.push ("Schließen");
+deTable.push("Close");
 //113
-deTable.push ("Nach Updates suchen");
+deTable.push("Check for updates");
 //114
-deTable.push ("IK");
+deTable.push("IK");
 //115
-deTable.push ("Goal");
+deTable.push("Goal");
 //116
-deTable.push ("Kontrolle");
+deTable.push("Controler");
 //117
-deTable.push ("Bones");
+deTable.push("Bones");
 //118
-deTable.push ("Zero");
+deTable.push("Zero");
 //119
-deTable.push ("Rot Morph");
+deTable.push("Rot Morph");
 //120
-deTable.push ("'Morpht' die Eigenschaft auf Basis der Ebenen-Rotation");
+deTable.push("'Morphs' the property based on a layer rotation");
 //121
-deTable.push ("Wiggle");
+deTable.push("Wiggle");
 //122
-deTable.push ("Swing");
+deTable.push("Oscillation");
 //123
-deTable.push ("Exposure");
+deTable.push("Exposition");
 //124
-deTable.push ("Pfad folgen");
+deTable.push("Path follow");
 //125
-deTable.push ("Rad");
+deTable.push("Wheel");
 //126
-deTable.push ("Spring");
+deTable.push("Spring");
 //127
-deTable.push ("Dist Link.");
+deTable.push("Dist. link");
 //128
-deTable.push ("Lens");
+deTable.push("Lens");
 //129
-deTable.push ("anim Copy");
+deTable.push("Copy anim");
 //130
-deTable.push ("anim Paste");
+deTable.push("Paste anim");
 //131
-deTable.push ("Copy Animation von ausgewählten Ebenen");
+deTable.push("Copy animation from selected layers");
 //132
-deTable.push ("Automatisch Animation in die Komposition einfügen (über Ebenen-Namen)");
+deTable.push("Automatically paste animation in the comp (using layer names)");
 //133
-deTable.push ("Links");
+deTable.push("Links");
 //134
-deTable.push ("Kontroll-Kamera");
+deTable.push("Control Cam");
 //135
-deTable.push ("3D Kamera");
+deTable.push("3D cam");
 //136
-deTable.push ("Rigging");
+deTable.push("Rigging");
 //137
-deTable.push ("IK / FK");
+deTable.push("IK / FK");
 //138
-deTable.push ("Obere FK");
+deTable.push("Upper FK");
 //139
-deTable.push ("Untere FK");
+deTable.push("Lower FK");
 //140
-deTable.push ("End-FK");
-//141
-deTable.push ("3D-IK");
-//142
-deTable.push("Auto-Rig");
-//143
-deTable.push("Ebenen:");
-//144
-deTable.push("Kopf");
-//145
-deTable.push("Hals");
-//146
-deTable.push("Körper");
-//147
-deTable.push("Hüfte");
-//148
-deTable.push("L Arm");
-//149
-deTable.push("L Unterarm");
-//150
-deTable.push("L Hand");
-//151
-deTable.push("R Arm");
-//152
-deTable.push("R Unterarm");
-//153
-deTable.push("R Hand");
-//154
-deTable.push("L Oberschenkel");
-//155
-deTable.push("L Unterschenkel");
-//156
-deTable.push("L Fuß");
-//157
-deTable.push("R Oberschenkel");
-//158
-deTable.push("R Unterschenkel");
-//159
-deTable.push("R Fuß");
-//160
-deTable.push("Optionen:");
-//161
-deTable.push("IK auf Körper");
-//162
-deTable.push("IK auf Hals");
-//163
-deTable.push("Stretch");
-//164
-deTable.push("FK über IK");
-//165
-deTable.push("Typ:");
-//166
-deTable.push("Solid");
-//167
-deTable.push("Null");
-//168
-deTable.push("Größe:");
-//169
-deTable.push("Größe:");
-//170
-deTable.push("Automatische Größe");
-//171
-deTable.push("Klein");
-//172
-deTable.push("Medium");
-//173
-deTable.push("Groß");
-//174
-deTable.push("Horizontal");
-//175
-deTable.push("Gebogen");
-//176
-deTable.push("Bewegung:");
-//177
-deTable.push("Master");
-//178
-deTable.push("Schulter");
-//179
-deTable.push("Ohne Simulation - Einfach\nBenötigt eine Animation auf der Ebene selbst.");
-//180
-deTable.push("Simuliert - Aufwändig\nFunktioniert auch ohne Animation auf der Ebene; benutzt Bewegung der übergeordneten Ebenen.");
-//181
-deTable.push("Wenn die Feder auf die Positionseigenschaft einer Ebene angewendet wird,\ngibt es zwei Wege, die Bewegung zu berechnen:");
-//182
-deTable.push("Es gibt zwei Wege zur Berechnung");
-//183
-deTable.push("Benötigt Animation auf der Ebene selbst.");
-//184
-deTable.push("Funktioniert auch ohne Animation auf der Ebene; benutzt Bewegung der übergeordneten Ebenen.");
-//185
-deTable.push("Endresultat kann geschmeidiger sein.");
-//186
-deTable.push("Umgekehrt");
-//187
-deTable.push("Farbe:");
-//188
-deTable.push("2D Multiplane");
+deTable.push("End FK");
 }
-//ESPANOL
+
+//=================== ESPANOL ================
 {
+
 var esTable = [];
+
 //0
 esTable.push("es");
 //1
-esTable.push("Seleccione \"Autorizar los escripts à escribir archivos...\" en la caja de dialogo suiguiente, despues reiniciar Duik");
+esTable.push("");
 //2
-esTable.push("Está disponible una nueva versión de Duik,\nir a http://ik.duduf.net  para descargarla");
+esTable.push("");
 //3
-esTable.push("No se puede consultar  actualizaciones de Duik,\nimposible  de obtener el número de versión, \ninténtalo de nuevo más tarde ");
+esTable.push("");
 //4
-esTable.push("Verificación imposible de las actualizaciones de Duik,\nConexión impossible à www.duduf.com");
+esTable.push("");
 //5
-esTable.push("Los IK sobre un  bone unicamente (LookAt) no están  (aún) disponibles para las capas 3D");
+esTable.push("");
 //6
-esTable.push("Verificar que TODAS las capas estén en 2D o 3D, no mezclar los dos tipos");
+esTable.push("");
 //7
 esTable.push("Selecciona los 'bones' y el controlador antes de crear un 'IK'");
 //8
-esTable.push(" Verificar que no hay capas con el mismo nombre");
+esTable.push("");
 //9
 esTable.push("Primero, selecciona el 'bone' final, después la 'raiz', y finalmente el controlador, en este orden exacto");
 //10
@@ -1174,15 +899,15 @@ esTable.push("Selecciona una capa antes de crear un controlador");
 //12
 esTable.push("Selecciona la capa dónde aplicar la función \"wiggle\"");
 //13
-esTable.push("Selecciona una esquina para crear un 'bone'");
+esTable.push("Selecciona un corner para crear un 'bone'");
 //14
 esTable.push("Si necesitas ayuda, visita \n\nhttp://ik.duduf.fr\n\no envía un e-mail a duduf@duduf.com\n\nTraducido por McManus\n\nUI Designed by Zeg\n\n3D IK made with the help of Eric Epstein\n\nImages included inside the script itself with the help of Kevin Schires");
 //15
 esTable.push("Selecciona dos capas para medir la distancia entre una y otra");
 //16
-esTable.push("Las dos capas están apiladas");
+esTable.push("");
 //17
-esTable.push("La distancia es de ");
+esTable.push("");
 //18
 esTable.push("Rueda");
 //19
@@ -1194,7 +919,7 @@ esTable.push("Controlador de Cámaras");
 //22
 esTable.push("Selecciona una cámara");
 //23
-esTable.push("La capa seleccionada no es una cámara!");
+esTable.push("La capa selecciona no es una cámara!");
 //24
 esTable.push("No se ha seleccionado ninguna cámara!");
 //25
@@ -1216,65 +941,65 @@ esTable.push("Distancia desde el centro");
 //33
 esTable.push("Selecciona todas la capas del destello de lente, empezando por el centro");
 //34
-esTable.push("Enlace de distancia");
+esTable.push("");
 //35
-esTable.push("Distancia Min");
+esTable.push("");
 //36
-esTable.push("Distancia Max");
+esTable.push("");
 //37
-esTable.push("Distancia de Atenuación-Falloff");
+esTable.push("");
 //38
-esTable.push("No se puede crear una expression con este efecto");
+esTable.push("");
 //39
-esTable.push("Enlace de distancia imposible");
+esTable.push("");
 //40
-esTable.push("Primero seleccionar la capa de referencia, despues el effecto en este orden");
+esTable.push("");
 //41
-esTable.push("Algunas capas han cambiado de nombre");
+esTable.push("");
 //42
-esTable.push("Rebote");
+esTable.push("");
 //43
-esTable.push("Elasticidad");
+esTable.push("");
 //44
-esTable.push("Atenuación");
+esTable.push("");
 //45
-esTable.push("Rebote");
+esTable.push("");
 //46
-esTable.push("Spring imposible");
+esTable.push("");
 //47
-esTable.push("Seleccione un efecto donde aplicar el spring-rebote");
+esTable.push("");
 //48
-esTable.push("Ningún efecto seleccionado");
+esTable.push("");
 //49
-esTable.push("Ninguna capa seleccionada");
+esTable.push("");
 //50
-esTable.push("Seleccione una capa para aplicar el zero");
+esTable.push("");
 //51
-esTable.push("Seleccionar las capas para cambiar su nombre");
+esTable.push("");
 //52
-esTable.push("Oscilación");
+esTable.push("");
 //53
-esTable.push("Amplitud");
+esTable.push("");
 //54
-esTable.push("Frequencia");
+esTable.push("");
 //55
-esTable.push("Offsert-Desfase");
+esTable.push("");
 //56
-esTable.push("Falloff-Amortiguado");
+esTable.push("");
 //57
-esTable.push("Expo de anim");
+esTable.push("");
 //58
-esTable.push("Expo anim");
+esTable.push("");
 //59
-esTable.push("Expo imposible");
+esTable.push("");
 //60
-esTable.push("Seleccione un efecto donde aplicar el expo de anim");
+esTable.push("");
 //61
-esTable.push("Seguimiento de trayectoria");
+esTable.push("");
 //62
-esTable.push("Resultado");
+esTable.push("");
 //63
-esTable.push("Radio ?");
+esTable.push("");
 //64
 esTable.push("Radio de la rueda, en pixels");
 //65
@@ -1286,101 +1011,101 @@ esTable.push("Escala");
 //68
 esTable.push("Opacidad");
 //69
-esTable.push("Animación");
+esTable.push("Animació");
 //70
-esTable.push("Interpolación");
+esTable.push("Interpolation");
 //71
-esTable.push("Objetos & herramientas");
+esTable.push("Objetos & Tools");
 //72
-esTable.push("Cámaras");
+esTable.push("Cámara");
 //73
-esTable.push("calculadora");
+esTable.push("");
 //74
-esTable.push("Notas");
+esTable.push("");
 //75
-esTable.push("Preferencias");
+esTable.push("");
 //76
-esTable.push("Idioma :");
+esTable.push("");
 //77
-esTable.push("Verificar las actualizaciones al arranque");
+esTable.push("");
 //78
-esTable.push("Duik está actualizado");
+esTable.push("");
 //79
 esTable.push("La capa seleccionada guardará su orientación, a pesar de las transformaciones de sus emparentados");
 //80
-esTable.push("Vista delantera");
+esTable.push("");
 //81
-esTable.push("Vista de derecha");
+esTable.push("");
 //82
 esTable.push("Crea un Objeto Null en el punto de anclaje de la capa seleccionada");
 //83
-esTable.push("Crea un 'bone' en una esquina de marioneta");
+esTable.push("Crea un 'bone' en una esquina de una marioneta");
 //84
-esTable.push("Crea un Objeto \"Zero\" sobre una capa");
+esTable.push("");
 //85
-esTable.push("Cambiar el nombre de las capas");
+esTable.push("");
 //86
-esTable.push("Acercamiento-enfoque");
+esTable.push("");
 //87
-esTable.push("Alejamiento-desenfoque");
+esTable.push("");
 //88
-esTable.push("Aplicar la influencia al acercamiento");
+esTable.push("");
 //89
-esTable.push("Aplicar la influencia al alejamiento");
+esTable.push("");
 //90
-esTable.push("Crear el Morpher");
+esTable.push("");
 //91
-esTable.push("Crear las imagines claves");
+esTable.push("");
 //92
-esTable.push("Crear una función \”wiggle\” (temblor) en una propiedad de la capa seleccionada ");
+esTable.push("Crear una función wiggle en una propiedad de la capa seleccionada");
 //93
-esTable.push("Crea una oscilación en una propiedad  de la capa seleccionada ");
+esTable.push("");
 //94
-esTable.push("Cambia la exposición de la anim de una propiedad  de la capa seleccionada ");
+esTable.push("");
 //95
-esTable.push("Orientación automatica de la capa sobre su tayectoria");
+esTable.push("");
 //96
-esTable.push("Automatiza la rotación de una rueda cuando movemos la capa");
+esTable.push("Automatiza la rotación de una rueda cuaando movemos la capa");
 //97
-esTable.push("La propiedad tendrá un rebote automatico, como un muelle");
+esTable.push("");
 //98
-esTable.push("Liga un efecto con la distancia hacia otra capa ");
+esTable.push("");
 //99
 esTable.push("Crea un destello de lente con las capas seleccionadas");
 //100
-esTable.push("Mide la distancia entre dos capas");
+esTable.push("");
 //101
-esTable.push("Cambiar los nombres de las capas");
+esTable.push("");
 //102
 esTable.push("Crea controladores de animación para una cámara");
 //103
 esTable.push("Crea controladores para una cámara 3D");
 //104
-esTable.push("Para ir a la linea : CTRL+ Intro");
+esTable.push("");
 //105
-esTable.push("Radio");
+esTable.push("");
 //106
-esTable.push("Medir");
+esTable.push("Measure");
 //107
-esTable.push("Prefijo");
+esTable.push("Prefix");
 //108
-esTable.push("Nombre");
+esTable.push("Name");
 //109
-esTable.push("Sufijo");
+esTable.push("Suffix");
 //110
-esTable.push("Enumerar a partir de");
+esTable.push("Number from");
 //111
-esTable.push("Cambiar de nombre");
+esTable.push("Rename");
 //112
-esTable.push("Cerrar");
+esTable.push("Close");
 //113
-esTable.push("Verificar las actualizaciones");
+esTable.push("Check for updates");
 //114
 esTable.push("IK");
 //115
 esTable.push("Goal");
 //116
-esTable.push("Controlardor");
+esTable.push("Controler");
 //117
 esTable.push("Bones");
 //118
@@ -1388,147 +1113,54 @@ esTable.push("Zero");
 //119
 esTable.push("Rot Morph");
 //120
-esTable.push("'Morph' la propiedad con la rotación de una capa ");
+esTable.push("'Morphs' the property based on a layer rotation");
 //121
 esTable.push("Wiggle");
 //122
-esTable.push("Oscilación");
+esTable.push("Oscillation");
 //123
-esTable.push("Exposición");
+esTable.push("Exposition");
 //124
-esTable.push("Seguido de trayectoria");
+esTable.push("Path follow");
 //125
-esTable.push("Rueda");
+esTable.push("Wheel");
 //126
-esTable.push("Spring-salto-rebote");
+esTable.push("Spring");
 //127
-esTable.push("enlace de distancia");
+esTable.push("Dist. link");
 //128
-esTable.push("Lente");
+esTable.push("Lens");
 //129
-esTable.push("Copiar anim");
+esTable.push("Copy anim");
 //130
-esTable.push("Pegar anim");
+esTable.push("Paste anim");
 //131
-esTable.push("Copiar la  animación de las capas seleccinadas");
+esTable.push("Copy animation from selected layers");
 //132
-esTable.push("Pegar automaticamente la animación en esta compo (utilizando los nombres de las capas)");
+esTable.push("Automatically paste animation in the comp (using layer names)");
 //133
-esTable.push("Enlaces");
+esTable.push("Links");
 //134
 esTable.push("Control Cam");
 //135
-esTable.push("Cam3D ");
+esTable.push("3D cam");
 //136
 esTable.push("Rigging");
 //137
 esTable.push("IK / FK");
 //138
-esTable.push("FK Superior ");
+esTable.push("Upper FK");
 //139
-esTable.push("FK inferior");
+esTable.push("Lower FK");
 //140
-esTable.push("FK final");
-//141
-esTable.push("IK 3D ");
-//142
-esTable.push("Auto-Rig");
-//143
-esTable.push("Capas:");
-//144
-esTable.push("Cabeza");
-//145
-esTable.push("Cuello");
-//146
-esTable.push("Pecho");
-//147
-esTable.push("Pelvis");
-//148
-esTable.push("Brazo Izdo");
-//149
-esTable.push("Antebrazo Izdo");
-//150
-esTable.push("Mano Izda");
-//151
-esTable.push("Brazo Dcho");
-//152
-esTable.push("Antebrazo Dcho");
-//153
-esTable.push("Mano Dcha");
-//154
-esTable.push("Muslo Izdo");
-//155
-esTable.push("Pantorrilla Izda");
-//156
-esTable.push("Pie Izdo");
-//157
-esTable.push("Muslo Dcho");
-//158
-esTable.push("Pantorrilla Dcha");
-//159
-esTable.push("Pie Dcho");
-//160
-esTable.push("Opciones :");
-//161
-esTable.push("IK sobre el pecho");
-//162
-esTable.push("IK sobre el cuello");
-//163
-esTable.push("Stretch");
-//164
-esTable.push("FK sobre IK");
-//165
-esTable.push("Tipos :");
-//166
-esTable.push("Sólido");
-//167
-esTable.push("Null-Nulo");
-//168
-esTable.push("Tamaño :");
-//169
-esTable.push("Tamaño :");
-//170
-esTable.push("Auto tamaño");
-//171
-esTable.push("Pequeño");
-//172
-esTable.push("Medio");
-//173
-esTable.push("Gran");
-//174
-esTable.push("Horizontal");
-//175
-esTable.push("Curvo");
-//176
-esTable.push("Movimiento:");
-//177
-esTable.push("Master");
-//178
-esTable.push("shoulder");
-//179
-esTable.push("Without simulation - Light\nNeeds an animation on the layer itself to work.");
-//180
-esTable.push("Simulated - Time consuming\nWorks even if there is no animation on the layer, using the movement of the parent layers.");
-//181
-esTable.push("When the Spring is used on the position property of a layer,\nthere are two ways to compute it:");
-//182
-esTable.push("there are two ways to compute it:");
-//183
-esTable.push("Needs an animation on the layer itself to work.");
-//184
-esTable.push("Works even if there is no animation on the layer, using the movement of the parent layers.");
-//185
-esTable.push("Resulting animation may be smoother too.");
-//186
-esTable.push("Reverse");
-//187
-esTable.push("Color:");
-//188
-esTable.push("2D Multiplane");
+esTable.push("End FK");
 }
-//BAHASA
+
+//=================== BAHASA ================
 {
+
 var idTable = [];
+
 //0
 idTable.push("id");
 //1
@@ -1811,106 +1443,13 @@ idTable.push("Upper FK");
 idTable.push("Lower FK");
 //140
 idTable.push("End FK");
-//141
-idTable.push("3D IK");
-//142
-idTable.push("Auto-Rig");
-//143
-idTable.push("Layers :");
-//144
-idTable.push("Head");
-//145
-idTable.push("Neck");
-//146
-idTable.push("Body");
-//147
-idTable.push("Pelvis");
-//148
-idTable.push("L Arm");
-//149
-idTable.push("L Forearm");
-//150
-idTable.push("L Hand");
-//151
-idTable.push("R Arm");
-//152
-idTable.push("R Forearm");
-//153
-idTable.push("R Hand");
-//154
-idTable.push("L Thigh");
-//155
-idTable.push("L Calf");
-//156
-idTable.push("L Foot");
-//157
-idTable.push("R Thigh");
-//158
-idTable.push("R Calf");
-//159
-idTable.push("R Foot");
-//160
-idTable.push("Options :");
-//161
-idTable.push("IK on the body");
-//162
-idTable.push("IK on the neck");
-//163
-idTable.push("Stretch");
-//164
-idTable.push("FK over IK");
-//165
-idTable.push("Type :");
-//166
-idTable.push("Solid");
-//167
-idTable.push("Null");
-//168
-idTable.push("Size :");
-//169
-idTable.push("Size :");
-//170
-idTable.push("Auto size");
-//171
-idTable.push("Small");
-//172
-idTable.push("Medium");
-//173
-idTable.push("Big");
-//174
-idTable.push("Horizontal");
-//175
-idTable.push("Curved");
-//176
-idTable.push("Movement:");
-//177
-idTable.push("Master");
-//178
-idTable.push("shoulder");
-//179
-idTable.push("Without simulation - Light\nNeeds an animation on the layer itself to work.");
-//180
-idTable.push("Simulated - Time consuming\nWorks even if there is no animation on the layer, using the movement of the parent layers.");
-//181
-idTable.push("When the Spring is used on the position property of a layer,\nthere are two ways to compute it:");
-//182
-idTable.push("there are two ways to compute it:");
-//183
-idTable.push("Needs an animation on the layer itself to work.");
-//184
-idTable.push("Works even if there is no animation on the layer, using the movement of the parent layers.");
-//185
-idTable.push("Resulting animation may be smoother too.");
-//186
-idTable.push("Reverse");
-//187
-idTable.push("Color:");
-//188
-idTable.push("2D Multiplane");
 }
-//PORTUGUES
+
+//=================== PORTUGUES ================
 {
+
 var ptTable = [];
+
 //0
 ptTable.push("pt");
 //1
@@ -1936,7 +1475,7 @@ ptTable.push("Selecione o layer antes de aplicar IK Goal");
 //11
 ptTable.push("Selecione o layer antes de criar um controller");
 //12
-ptTable.push("Selecione o property no qual quer aplicar o \"wiggle\"");
+ptTable.push("Selecione o layer no qual quer aplicar o \"wiggle\"");
 //13
 ptTable.push("Selecione o pin para criar um bone");
 //14
@@ -2193,103 +1732,391 @@ ptTable.push("Upper FK");
 ptTable.push("Lower FK");
 //140
 ptTable.push("End FK");
-//141
-ptTable.push("3D IK");
-//142
-ptTable.push("Auto-Rig");
-//143
-ptTable.push("Layers :");
-//144
-ptTable.push("Head");
-//145
-ptTable.push("Neck");
-//146
-ptTable.push("Body");
-//147
-ptTable.push("Pelvis");
-//148
-ptTable.push("L Arm");
-//149
-ptTable.push("L Forearm");
-//150
-ptTable.push("L Hand");
-//151
-ptTable.push("R Arm");
-//152
-ptTable.push("R Forearm");
-//153
-ptTable.push("R Hand");
-//154
-ptTable.push("L Thigh");
-//155
-ptTable.push("L Calf");
-//156
-ptTable.push("L Foot");
-//157
-ptTable.push("R Thigh");
-//158
-ptTable.push("R Calf");
-//159
-ptTable.push("R Foot");
-//160
-ptTable.push("Options :");
-//161
-ptTable.push("IK on the body");
-//162
-ptTable.push("IK on the neck");
-//163
-ptTable.push("Stretch");
-//164
-ptTable.push("FK over IK");
-//165
-ptTable.push("Type :");
-//166
-ptTable.push("Solid");
-//167
-ptTable.push("Null");
-//168
-ptTable.push("Size :");
-//169
-ptTable.push("Size :");
-//170
-ptTable.push("Auto size");
-//171
-ptTable.push("Small");
-//172
-ptTable.push("Medium");
-//173
-ptTable.push("Big");
-//174
-ptTable.push("Horizontal");
-//175
-ptTable.push("Curved");
-//176
-ptTable.push("Movement:");
-//177
-ptTable.push("Master");
-//178
-ptTable.push("shoulder");
-//179
-ptTable.push("Without simulation - Light\nNeeds an animation on the layer itself to work.");
-//180
-ptTable.push("Simulated - Time consuming\nWorks even if there is no animation on the layer, using the movement of the parent layers.");
-//181
-ptTable.push("When the Spring is used on the position property of a layer,\nthere are two ways to compute it:");
-//182
-ptTable.push("there are two ways to compute it:");
-//183
-ptTable.push("Needs an animation on the layer itself to work.");
-//184
-ptTable.push("Works even if there is no animation on the layer, using the movement of the parent layers.");
-//185
-ptTable.push("Resulting animation may be smoother too.");
-//186
-ptTable.push("Reverse");
-//187
-ptTable.push("Color:");
-//188
-ptTable.push("2D Multiplane");
 }
+
+//CHINESE
+{
+var zhTable = [];
+//0
+zhTable.push("zh");
+//1
+zhTable.push("请在下面的对话框中选择 \"允许脚本写入文件...\" ，然后重启 Duik 。");
+//2
+zhTable.push("现有新版 Duik ，\n前往 http://ik.duduf.com 下载");
+//3
+zhTable.push("无法为 Duik 检查更新，\n无法获取版本号，\n请稍后再试。");
+//4
+zhTable.push("无法为 Duik 检查更新，\n无法连接至 www.duduf.com");
+//5
+zhTable.push("单一骨节上的 IK (LookAt)，（目前）还不支持3D图层");
+//6
+zhTable.push("请确认所有层都是2D层或3D层，不要混用两者");
+//7
+zhTable.push("创建 IK 前先选择骨骼和控制器");
+//8
+zhTable.push("确认所有层的名字都不一样！");
+//9
+zhTable.push("严格按照下述顺序选择，首先是末端骨骼、然后是中间骨骼、接着是根骨骼，最后是控制器");
+//10
+zhTable.push("在应用 IK目标 前先选择所需图层");
+//11
+zhTable.push("在创建控制器前选择一个图层");
+//12
+zhTable.push("请选择需要添加 \"抖动\" 功能的属性");
+//13
+zhTable.push("选择一个图钉来创建骨骼");
+//14
+zhTable.push("如需帮助，请访问 \n\nhttp://ik.duduf.com\n\n\n或发送电子邮件至 duduf@duduf.com\n\nUI Designed by Zeg\n\n3D IK made with the help of Eric Epstein\n\nImages included inside the script itself with the help of Kevin Schires");
+//15
+zhTable.push("请选择两个图层来测量它们之间的距离。");
+//16
+zhTable.push("两层处在同一个位置。");
+//17
+zhTable.push("距离是 ");
+//18
+zhTable.push("轮子");
+//19
+zhTable.push("不可用的半径");
+//20
+zhTable.push("轮子的半径是多少？");
+//21
+zhTable.push("摄像机控制器");
+//22
+zhTable.push("选择摄像机");
+//23
+zhTable.push("选择一个非摄像机的层");
+//24
+zhTable.push("没有摄像机被选中");
+//25
+zhTable.push("立体摄像机");
+//26
+zhTable.push("摄像机汇聚");
+//27
+zhTable.push("摄像机间距");
+//28
+zhTable.push("创建变形");
+//29
+zhTable.push("焦距控制器");
+//30
+zhTable.push("强度");
+//31
+zhTable.push("缩放");
+//32
+zhTable.push("距中心距离");
+//33
+zhTable.push("从中心选取所有包含镜头光晕的层");
+//34
+zhTable.push("距离链接");
+//35
+zhTable.push(" 最小距离");
+//36
+zhTable.push(" 最大距离");
+//37
+zhTable.push(" 衰减");
+//38
+zhTable.push("无法在此效果上创建表达式");
+//39
+zhTable.push("无效的距离链接");
+//40
+zhTable.push("首先选择参考图层，再选择效果");
+//41
+zhTable.push("部分层已被重命名");
+//42
+zhTable.push("弹簧");
+//43
+zhTable.push("弹性");
+//44
+zhTable.push("阻尼");
+//45
+zhTable.push("反弹");
+//46
+zhTable.push("无效的弹簧");
+//47
+zhTable.push("选择需要添加弹簧的效果");
+//48
+zhTable.push("没有选择效果");
+//49
+zhTable.push("没有选择图层");
+//50
+zhTable.push("选择一个图层创建归零");
+//51
+zhTable.push("选择一个层来重命名");
+//52
+zhTable.push("震荡");
+//53
+zhTable.push("幅度");
+//54
+zhTable.push("频率");
+//55
+zhTable.push("偏移");
+//56
+zhTable.push("衰减");
+//57
+zhTable.push("Animation Exposure");
+//58
+zhTable.push("Anim Exposure");
+//59
+zhTable.push("Impossible exposure");
+//60
+zhTable.push("选择想要创建 the animation exposure 的层");
+//61
+zhTable.push("路径追随");
+//62
+zhTable.push("结果");
+//63
+zhTable.push("半径？");
+//64
+zhTable.push("轮子的半径，像素为单位");
+//65
+zhTable.push("与另一物体做测量");
+//66
+zhTable.push("所有轴向");
+//67
+zhTable.push("缩放");
+//68
+zhTable.push("不透明度");
+//69
+zhTable.push("动画");
+//70
+zhTable.push("补间");
+//71
+zhTable.push("物体与工具");
+//72
+zhTable.push("摄像机");
+//73
+zhTable.push("计算器");
+//74
+zhTable.push("记事本");
+//75
+zhTable.push("设置");
+//76
+zhTable.push("语言：");
+//77
+zhTable.push("启动时检查更新");
+//78
+zhTable.push("Duik 是最新版本");
+//79
+zhTable.push("被选择的层将无视父级变换而保持原有旋转方向");
+//80
+zhTable.push("前视图");
+//81
+zhTable.push("右视图");
+//82
+zhTable.push("在选中层的锚点处创建一个空物体");
+//83
+zhTable.push("在木偶工具图针处创建一个骨骼");
+//84
+zhTable.push("创建所选图层一个 \"归零\" 物体");
+//85
+zhTable.push("重命名图层");
+//86
+zhTable.push("入点");
+//87
+zhTable.push("出点");
+//88
+zhTable.push("缓入");
+//89
+zhTable.push("缓出");
+//90
+zhTable.push("创建变形");
+//91
+zhTable.push("创建关键帧");
+//92
+zhTable.push("为所选层的属性创建抖动功能");
+//93
+zhTable.push("为所选属性创建震荡");
+//94
+zhTable.push("改变所选属性的 the exposure of the animation");
+//95
+zhTable.push("自动沿路径旋转层的轴向");
+//96
+zhTable.push("当移动层的时候自动记录轮子的旋转");
+//97
+zhTable.push("属性值将像弹簧一样来回震荡");
+//98
+zhTable.push("用与另外一个层的距离来影响属性值");
+//99
+zhTable.push("用所选层创建镜头光晕");
+//100
+zhTable.push("测量两个层之间的距离");
+//101
+zhTable.push("重命名图层");
+//102
+zhTable.push("为摄像机创建动画控制器");
+//103
+zhTable.push("为立体摄像机创建控制器");
+//104
+zhTable.push("另起一行： CTRL + Enter");
+//105
+zhTable.push("半径");
+//106
+zhTable.push("测量");
+//107
+zhTable.push("前缀");
+//108
+zhTable.push("名称");
+//109
+zhTable.push("后缀");
+//110
+zhTable.push("起始数字");
+//111
+zhTable.push("重命名");
+//112
+zhTable.push("关闭");
+//113
+zhTable.push("检查更新");
+//114
+zhTable.push("IK");
+//115
+zhTable.push("目标");
+//116
+zhTable.push("控制器");
+//117
+zhTable.push("骨骼");
+//118
+zhTable.push("归零");
+//119
+zhTable.push("Rot Morph");
+//120
+zhTable.push("基于层的旋转来控制'Morphs'");
+//121
+zhTable.push("抖动");
+//122
+zhTable.push("震荡");
+//123
+zhTable.push("Exposition");
+//124
+zhTable.push("路径跟随");
+//125
+zhTable.push("车轮");
+//126
+zhTable.push("弹簧");
+//127
+zhTable.push("距离链接");
+//128
+zhTable.push("镜头");
+//129
+zhTable.push("复制动画");
+//130
+zhTable.push("粘贴");
+//131
+zhTable.push("从选中层复制动画");
+//132
+zhTable.push("匹配层名称）来自动粘贴动画");
+//133
+zhTable.push("链接");
+//134
+zhTable.push("控制摄像机");
+//135
+zhTable.push("立体摄像机");
+//136
+zhTable.push("绑定");
+//137
+zhTable.push("IK / FK");
+//138
+zhTable.push("上级 FK");
+//139
+zhTable.push("下级 FK");
+//140
+zhTable.push("末端 FK");
+//141
+zhTable.push("3D IK");
+//142
+zhTable.push("自动绑定");
+//143
+zhTable.push("层名称：");
+//144
+zhTable.push("头");
+//145
+zhTable.push("颈");
+//146
+zhTable.push("躯干");
+//147
+zhTable.push("盆骨");
+//148
+zhTable.push("左大臂");
+//149
+zhTable.push("左小臂");
+//150
+zhTable.push("左手");
+//151
+zhTable.push("右大臂");
+//152
+zhTable.push("右小臂");
+//153
+zhTable.push("右手");
+//154
+zhTable.push("左大腿");
+//155
+zhTable.push("左小腿");
+//156
+zhTable.push("左脚");
+//157
+zhTable.push("右大腿");
+//158
+zhTable.push("右小腿");
+//159
+zhTable.push("右腿");
+//160
+zhTable.push("选项：");
+//161
+zhTable.push("基于身体上创建IK");
+//162
+zhTable.push("基于颈部创建IK");
+//163
+zhTable.push("拉伸");
+//164
+zhTable.push("在IK创建FK");
+//165
+zhTable.push("属性：");
+//166
+zhTable.push("固态层");
+//167
+zhTable.push("空物体层");
+//168
+zhTable.push("大小：");
+//169
+zhTable.push("大小：");
+//170
+zhTable.push("自动大小");
+//171
+zhTable.push("小");
+//172
+zhTable.push("中");
+//173
+zhTable.push("大");
+//174
+zhTable.push("水平的");
+//175
+zhTable.push("曲线的");
+//176
+zhTable.push("运动：");
+//177
+zhTable.push("主要的");
+//178
+zhTable.push("肩膀");
+//179
+zhTable.push("不做模拟 - 轻量级");
+//180
+zhTable.push("模拟 - 大量运算");
+//181
+zhTable.push("当弹簧用于层的位置属性的时候");
+//182
+zhTable.push("有两种计算的方式：");
+//183
+zhTable.push("需要层自身具有一个动画才起效");
+//184
+zhTable.push("用父级的运动代替，即便层本身没有动画也起效");
+//185
+zhTable.push("最终动画也更顺滑。");
+//186
+zhTable.push("反向");
+//187
+zhTable.push("颜色：");
+//188
+zhTable.push("2D多平面");
+}
+
 //récupère un message
 function getMessage(messageNumber) {
 	var message = "";
@@ -2299,6 +2126,8 @@ function getMessage(messageNumber) {
 	else if (app.settings.getSetting("duik", "lang") == "GERMAN") message = deTable[messageNumber];
 	else if (app.settings.getSetting("duik", "lang") == "BAHASA") message = idTable[messageNumber];
 	else if (app.settings.getSetting("duik", "lang") == "PORTUGUESE") message = ptTable[messageNumber];
+	else if (app.settings.getSetting("duik", "lang") == "CHINESE") message = zhTable[messageNumber];
 	if (message != "") return message;
 	else return enTable[messageNumber];
 	}
+

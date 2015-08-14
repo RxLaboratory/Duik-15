@@ -1,4 +1,4 @@
-﻿/*
+/*
 Duik - Duduf IK Tools
 Copyright (c) 2008 - 2014 Nicolas Dufresne
 http://ik.duduf.fr
@@ -3210,6 +3210,7 @@ function fnDuIK(thisObj)
 				if (boutonlangue.selection == 3) app.settings.saveSetting("duik","lang","GERMAN");
 				if (boutonlangue.selection == 4) app.settings.saveSetting("duik","lang","BAHASA");
 				if (boutonlangue.selection == 5) app.settings.saveSetting("duik","lang","PORTUGUESE");
+				if (boutonlangue.selection == 6) app.settings.saveSetting("duik","lang","CHINESE");
 				}
 
 			//FONCTIONS CALC
@@ -4389,13 +4390,14 @@ function fnDuIK(thisObj)
 		var groupeLangues = settingsUIGroup.add("group");
 		groupeLangues.alignment = ["left","center"];
 		groupeLangues.add("statictext",undefined,getMessage(76));
-		var boutonlangue = groupeLangues.add("dropdownlist",undefined,["Français","English","Español","Deutsch","Bahasa","Português"]);
+		var boutonlangue = groupeLangues.add("dropdownlist",undefined,["Français","English","Español","Deutsch","Bahasa","Português","CHINESE"]);
 		if (app.settings.getSetting("duik", "lang") == "FRENCH") boutonlangue.selection = 0;
 		if (app.settings.getSetting("duik", "lang") == "ENGLISH") boutonlangue.selection = 1;
 		if (app.settings.getSetting("duik", "lang") == "SPANISH") boutonlangue.selection = 2;
 		if (app.settings.getSetting("duik", "lang") == "GERMAN") boutonlangue.selection = 3;
 		if (app.settings.getSetting("duik", "lang") == "BAHASA") boutonlangue.selection = 4;
 		if (app.settings.getSetting("duik", "lang") == "PORTUGUESE") boutonlangue.selection = 5;
+		if (app.settings.getSetting("duik", "lang") == "CHINESE") boutonlangue.selection = 6;
 		boutonlangue.onChange = choixLangue;
 		addSeparator(settingsUIGroup,"");
 		settingsUIGroup.add("statictext",undefined,"Panel selector:");
