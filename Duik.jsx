@@ -1,6 +1,6 @@
 ﻿/*
 Duik - Duduf IK Tools
-Copyright (c) 2008 - 2014 Nicolas Dufresne
+Copyright (c) 2008 - 2016 Nicolas Dufresne
 http://ik.duduf.fr
 http://ik.duduf.com
 
@@ -30,7 +30,8 @@ along with Duik. If not, see <http://www.gnu.org/licenses/>.
 (function (thisObj)
 {
 //=========================
-var version = '15.09';
+var version = '15.11';
+var developper = false;
 //=========================
 
 //=================================
@@ -108,56 +109,62 @@ preloadDuik();
 //=================================
 function checkForUpdate(version,showAlert)
 {
-var reply = '';
-//socket
-conn = new Socket;
-// se connecter a duduf.com
-if (conn.open ('www.duduf.com:80'))
-{
-// recuperer la version actuelle
-if (conn.writeln ('GET /downloads/duik/version.txt  HTTP/1.0\nUser-Agent: Duik/' + version + '\nHost: duduf.com\n'))
-reply = conn.read(1000);
-conn.close();
-//chercher la version dans la reponse du serveur :
-var reponse = reply.lastIndexOf('version',reply.length);
-if(reponse != -1)
-{
-newVersion = reply.slice(reponse+8,reply.length+1);
-if (showAlert && version != newVersion) alert(tr("A new version of Duik is available,\ngo to http://ik.duduf.com to download it"));
-return newVersion;
-}
-}
+	var reply = '';
+	//socket
+	conn = new Socket;
+	// se connecter a duduf.com
+	if (conn.open ('rainboxprod.net:80'))
+	{
+		// recuperer la version actuelle
+		//check AE Version
+		var reV = /^(\d+\.?\d*)/i;
+		var v = app.version.match(reV);
+		delete reV;
+		var userAgent = 'User-Agent: Duik/' + version + ' (' + $.os + ')' + ' AE/' + v[0];
+		if (conn.writeln('GET /duik/version.txt  HTTP/1.0\n' + userAgent + '\nHost: rainboxprod.net\n'))
+			reply = conn.read(1000);
+		conn.close();
+		delete v;
+		//chercher la version dans la reponse du serveur :
+		var reponse = reply.lastIndexOf('version',reply.length);
+		if(reponse != -1)
+		{
+			newVersion = reply.slice(reponse+8,reply.length+1);
+			if (showAlert && version != newVersion) alert(tr("A new version of Duik is available,\ngo to http://rainboxprod.coop to download it"));
+			return newVersion;
+		}
+	}
 }
 
 function preloadDuik ()
 {
-if (app.settings.getSetting('duik','version') == 'oui')
-{
-var newV = checkForUpdate(version,false);
-if ( version == newV || newV == undefined)
-{
-loadDuik();
-}
-else
-{
-var updGroup = palette.add('group');
-updGroup.orientation = 'column';
-updGroup.alignChildren = ['center','top'];
-var updVersionBox = updGroup.add('statictext',undefined,tr("Duik current version: ") + version);
-var updNewVersionBox = updGroup.add('statictext',undefined,'temp',{multiline:true});
-updNewVersionBox.text = '- ' + tr("UPDATE AVAILABLE -\n\nA new version of Duik is available!\nVersion: ") + newV + tr("\n\nGo to http://duik.duduf.net to download it.");
-var updButton = updGroup.add('button',undefined,tr("Launch Duik"));
-updButton.onClick = function ()
-{
-updGroup.hide();
-loadDuik();
-}
-}
-}
-else
-{
-loadDuik();
-}
+	if (app.settings.getSetting('duik','version') == 'oui' && !developper)
+	{
+		var newV = checkForUpdate(version,false);
+		if ( version == newV || newV == undefined)
+		{
+		loadDuik();
+		}
+		else
+		{
+		var updGroup = palette.add('group');
+		updGroup.orientation = 'column';
+		updGroup.alignChildren = ['center','top'];
+		var updVersionBox = updGroup.add('statictext',undefined,tr("Duik current version: ") + version);
+		var updNewVersionBox = updGroup.add('statictext',undefined,'temp',{multiline:true});
+		updNewVersionBox.text = '- ' + tr("UPDATE AVAILABLE -\n\nA new version of Duik is available!\nVersion: ") + newV + tr("\n\nGo to http://rainboxprod.coop to download it.");
+		var updButton = updGroup.add('button',undefined,tr("Launch Duik"));
+		updButton.onClick = function ()
+		{
+		updGroup.hide();
+		loadDuik();
+		}
+		}
+	}
+	else
+	{
+		loadDuik();
+	}
 }
 
 function loadDuik()
@@ -167,9 +174,10 @@ function loadDuik()
 //========== LOAD libDuik =========
 //=================================
 {
+	if (developper) if (typeof Duik === 'object') delete Duik;
 #include 'libduik.jsxinc'
 //if pseudo effects are not installed
-if (Duik.usePresets)
+if (Duik.usePresets && !developper)
 {
 //PALETTE
 {
@@ -234,7 +242,7 @@ ciGroup.alignChildren = ['fill','fill'];
 var ciText = ciGroup.add('statictext',undefined,'',{multiline:true});
 ciText.minimumSize = [150,60];
 ciText.alignment = ['center','top'];
-ciText.text = '---- ' + tr("ERROR") + ' ----\n\n' + tr("Oops!\nSomething is wrong, Duik can not find pseudo effects.\n\nGo to http://www.duduf.net to get help.") + '\n\n-----------------------------';
+ciText.text = '---- ' + tr("ERROR") + ' ----\n\n' + tr("Oops!\nSomething is wrong, Duik can not find pseudo effects.\n\nGo to http://rainboxprod.coop to get help.") + '\n\n-----------------------------';
 ciGroup.visible = false;
 }
 
@@ -2778,51 +2786,51 @@ app.endUndoGroup();
 //RANDOMIZE
 function randOKButtonClicked()
 {
-if (!(app.project.activeItem instanceof CompItem)) return;
+	if (!(app.project.activeItem instanceof CompItem)) return;
 
-app.beginUndoGroup(tr("Duik - Randomize"));
+	app.beginUndoGroup(tr("Duik - Randomize"));
 
-var xmin = parseFloat(randMinXValueEdit.text);
-var xmax = parseFloat(randMaxXValueEdit.text);
-var ymin = parseFloat(randMinYValueEdit.text);
-var ymax = parseFloat(randMaxYValueEdit.text);
-var zmin = parseFloat(randMinZValueEdit.text);
-var zmax = parseFloat(randMaxZValueEdit.text);
+	var xmin = parseFloat(randMinXValueEdit.text);
+	var xmax = parseFloat(randMaxXValueEdit.text);
+	var ymin = parseFloat(randMinYValueEdit.text);
+	var ymax = parseFloat(randMaxYValueEdit.text);
+	var zmin = parseFloat(randMinZValueEdit.text);
+	var zmax = parseFloat(randMaxZValueEdit.text);
 
-if (randPropertiesButton.value)
-{
-for (var i = 0;i<app.project.activeItem.selectedLayers.length;i++)
-{
-var layer = app.project.activeItem.selectedLayers[i];
-Duik.randomizeProperties(layer.selectedProperties,randFromValueButton.value,xmin,xmax,ymin,ymax,zmin,zmax);
-}
-}
-else if (randStartTimeButton.value)
-{
-Duik.randomizeStartTimes(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
-}
-else if (randInPointButton.value)
-{
-Duik.randomizeInPoints(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
-}
-else if (randOutPointButton.value)
-{
-Duik.randomizeOutPoints(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
-}
-else if (randKeyValueButton.value)
-{
-for (var i = 0;i<app.project.activeItem.selectedLayers.length;i++)
-{
-var layer = app.project.activeItem.selectedLayers[i];
-Duik.randomizeSelectedKeys(layer.selectedProperties,randFromValueButton.value,xmin,xmax,ymin,ymax,zmin,zmax);
-}
-}
-else if (randKeyTimeButton.value)
-{
-Duik.randomizeSelectedKeyTimes(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
-}
+	if (randPropertiesButton.value)
+	{
+	for (var i = 0;i<app.project.activeItem.selectedLayers.length;i++)
+	{
+	var layer = app.project.activeItem.selectedLayers[i];
+	Duik.randomizeProperties(layer.selectedProperties,randFromValueButton.value,xmin,xmax,ymin,ymax,zmin,zmax);
+	}
+	}
+	else if (randStartTimeButton.value)
+	{
+		Duik.randomizeStartTimes(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
+	}
+	else if (randInPointButton.value)
+	{
+	Duik.randomizeInPoints(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
+	}
+	else if (randOutPointButton.value)
+	{
+	Duik.randomizeOutPoints(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
+	}
+	else if (randKeyValueButton.value)
+	{
+	for (var i = 0;i<app.project.activeItem.selectedLayers.length;i++)
+	{
+	var layer = app.project.activeItem.selectedLayers[i];
+	Duik.randomizeSelectedKeys(layer.selectedProperties,randFromValueButton.value,xmin,xmax,ymin,ymax,zmin,zmax);
+	}
+	}
+	else if (randKeyTimeButton.value)
+	{
+	Duik.randomizeSelectedKeyTimes(app.project.activeItem.selectedLayers,randFromValueButton.value,xmin,xmax);
+	}
 
-app.endUndoGroup();
+	app.endUndoGroup();
 }
 
 //CEL Animation
@@ -3248,327 +3256,370 @@ resultatcalc2.text ='error';
 //============= INTERPOLATIONS ======================
 function lineaire() {
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.LINEAR);
-}
-}
-return;
-}
+	app.beginUndoGroup('Duik - ' + tr("Linear Interpolation"));
+	
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.LINEAR);
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.LINEAR);
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+		//for props
+		for (var j=0;j<layers[i].selectedProperties.length;j++)
+		{
+			var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+			if (prop.canVaryOverTime)
+			{
+				//for keys
+				for (var k=0;k<prop.selectedKeys.length;k++)
+				{
+					prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.LINEAR);
+					if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){} //prop.isSpatial is true on shapes? try/catch as a workaround
+				}
+			}
+		}
+	}
+	
+	app.endUndoGroup();
 }
 
 function lissageA() {
 
-var inVal = parseInt(interpoInEdit.text);
-if (!inVal) inVal = 33;
-easeIn = new KeyframeEase(0,inVal);
-var outVal = parseInt(interpoOutEdit.text);
-if (!outVal) outVal = 33;
-easeOut = new KeyframeEase(0,outVal);
+	var inVal = parseInt(interpoInEdit.text);
+	if (!inVal) inVal = 33;
+	easeIn = new KeyframeEase(0,inVal);
+	var outVal = parseInt(interpoOutEdit.text);
+	if (!outVal) outVal = 33;
+	easeOut = new KeyframeEase(0,outVal);
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
+	
+	app.beginUndoGroup('Duik - ' + tr("Ease In"));
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					//influences
+					if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+					else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
+					else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
 
-//type
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER,KeyframeInterpolationType.LINEAR);
+					//type
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER,KeyframeInterpolationType.LINEAR);
+				}
 
-}
-}
-return;
-}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+		//for props
+		for (var j=0;j<layers[i].selectedProperties.length;j++)
+		{
+			var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+			if (prop.canVaryOverTime)
+			{
+				//for keys
+				for (var k=0;k<prop.selectedKeys.length;k++)
+				{
+					//influences
+					if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+					else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
+					else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
 
-//type
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER,KeyframeInterpolationType.LINEAR);
+					//type
+					prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER,KeyframeInterpolationType.LINEAR);
 
-//not roving
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+					//not roving
+				if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){}
+				}
+			}
+		}
+	}
+	app.endUndoGroup();
 }
 
 function lissageE() {
 
-var inVal = parseInt(interpoInEdit.text);
-if (!inVal) inVal = 33;
-easeIn = new KeyframeEase(0,inVal);
-var outVal = parseInt(interpoOutEdit.text);
-if (!outVal) outVal = 33;
-easeOut = new KeyframeEase(0,outVal);
+	var inVal = parseInt(interpoInEdit.text);
+	if (!inVal) inVal = 33;
+	easeIn = new KeyframeEase(0,inVal);
+	var outVal = parseInt(interpoOutEdit.text);
+	if (!outVal) outVal = 33;
+	easeOut = new KeyframeEase(0,outVal);
 
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
+	
+	app.beginUndoGroup('Duik - ' + tr("Ease Out"));
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					//influences
+					if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+					else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
+					else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
 
-//type
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.LINEAR,KeyframeInterpolationType.BEZIER);
-}
-}
-return;
-}
+					//type
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.LINEAR,KeyframeInterpolationType.BEZIER);
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+	//for props
+	for (var j=0;j<layers[i].selectedProperties.length;j++)
+	{
+	var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+	if (prop.canVaryOverTime)
+	{
+	//for keys
+	for (var k=0;k<prop.selectedKeys.length;k++)
+	{
+	//influences
+	if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+	else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
+	else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
 
-//type
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.LINEAR,KeyframeInterpolationType.BEZIER);
+	//type
+	prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.LINEAR,KeyframeInterpolationType.BEZIER);
 
-//not roving
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+	//not roving
+	if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){}
+	}
+	}
+	}
+	}
+	app.endUndoGroup();
 }
 
 function lissage() {
 
-var inVal = parseInt(interpoInEdit.text);
-if (!inVal) inVal = 33;
-easeIn = new KeyframeEase(0,inVal);
-var outVal = parseInt(interpoOutEdit.text);
-if (!outVal) outVal = 33;
-easeOut = new KeyframeEase(0,outVal);
+	var inVal = parseInt(interpoInEdit.text);
+	if (!inVal) inVal = 33;
+	easeIn = new KeyframeEase(0,inVal);
+	var outVal = parseInt(interpoOutEdit.text);
+	if (!outVal) outVal = 33;
+	easeOut = new KeyframeEase(0,outVal);
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER);
-prop.setTemporalContinuousAtKey(key, false);
+	app.beginUndoGroup('Duik - ' + tr("Easy Ease"));
 
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
-}
-}
-return;
-}
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER);
+					prop.setTemporalContinuousAtKey(key, false);
+
+					//influences
+					if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+					else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(key,[easeIn,easeIn],[easeOut,easeOut]); }
+					else { prop.setTemporalEaseAtKey(key,[easeIn],[easeOut]); }
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER);
-prop.setTemporalContinuousAtKey(prop.selectedKeys[k], false);
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+	//for props
+	for (var j=0;j<layers[i].selectedProperties.length;j++)
+	{
+	var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+	if (prop.canVaryOverTime)
+	{
+	//for keys
+	for (var k=0;k<prop.selectedKeys.length;k++)
+	{
+	prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER);
+	prop.setTemporalContinuousAtKey(prop.selectedKeys[k], false);
 
-//influences
-if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
-else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
-else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
+	//influences
+	if (!prop.isSpatial && prop.value.length == 3) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn,easeIn],[easeOut,easeOut,easeOut]); }
+	else if (!prop.isSpatial && prop.value.length == 2) { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn,easeIn],[easeOut,easeOut]); }
+	else { prop.setTemporalEaseAtKey(prop.selectedKeys[k],[easeIn],[easeOut]); }
 
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+	if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){}
+	}
+	}
+	}
+	}
+	app.endUndoGroup();
 }
 
 function continu() {
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER);
-prop.setTemporalContinuousAtKey(key, true);
-prop.setTemporalAutoBezierAtKey(key, true);
-}
-}
-return;
-}
+	app.beginUndoGroup('Duik - ' + tr("Auto Bezier"));
+
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.BEZIER);
+					prop.setTemporalContinuousAtKey(key, true);
+					prop.setTemporalAutoBezierAtKey(key, true);
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER);
-prop.setTemporalContinuousAtKey(prop.selectedKeys[k], true);
-prop.setTemporalAutoBezierAtKey(prop.selectedKeys[k], true);
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+	//for props
+	for (var j=0;j<layers[i].selectedProperties.length;j++)
+	{
+	var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+	if (prop.canVaryOverTime)
+	{
+	//for keys
+	for (var k=0;k<prop.selectedKeys.length;k++)
+	{
+	prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.BEZIER);
+	prop.setTemporalContinuousAtKey(prop.selectedKeys[k], true);
+	prop.setTemporalAutoBezierAtKey(prop.selectedKeys[k], true);
+	if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){}
+	}
+	}
+	}
+	}
+	app.endUndoGroup();
 }
 
 function maintien() {
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-var key = prop.addKey(comp.time);
-prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.HOLD);
-}
-}
-return;
-}
+	app.beginUndoGroup('Duik - ' + tr("Hold"));
+
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.canVaryOverTime)
+				{
+					var key = prop.addKey(comp.time);
+					prop.setInterpolationTypeAtKey(key,KeyframeInterpolationType.HOLD);
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.HOLD);
-if (prop.isSpatial) prop.setRovingAtKey(prop.selectedKeys[k],false);
-}
-}
-}
-}
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+	//for props
+	for (var j=0;j<layers[i].selectedProperties.length;j++)
+	{
+	var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+	if (prop.canVaryOverTime)
+	{
+	//for keys
+	for (var k=0;k<prop.selectedKeys.length;k++)
+	{
+	prop.setInterpolationTypeAtKey(prop.selectedKeys[k],KeyframeInterpolationType.HOLD);
+	if (prop.isSpatial) try { prop.setRovingAtKey(prop.selectedKeys[k],false); } catch(e){}
+	}
+	}
+	}
+	}
+	app.endUndoGroup();
 }
 
 function infl() {
@@ -3703,51 +3754,54 @@ groupeInterpoOut.enabled = true;
 
 function roving () {
 
-if (!(app.project.activeItem instanceof CompItem)) return;
-var comp = app.project.activeItem;
-if (comp.selectedLayers.length == 0) return;
-var layers = comp.selectedLayers;
+	if (!(app.project.activeItem instanceof CompItem)) return;
+	var comp = app.project.activeItem;
+	if (comp.selectedLayers.length == 0) return;
+	var layers = comp.selectedLayers;
 
-//if no selected keys, add key on selected properties
-if (!Duik.utils.layersHaveSelectedKeys(layers))
-{
-for (var i=0;i<layers.length;i++)
-{
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = layers[i].selectedProperties[j];
-if (prop.propertyValueType == PropertyValueType.ThreeD_SPATIAL || prop.propertyValueType == PropertyValueType.TwoD_SPATIAL)
-{
-var key = prop.addKey(comp.time);
-prop.setRovingAtKey(key,true);
-}
+	app.beginUndoGroup('Duik - ' + tr("Roving"));
 
-}
-}
-return;
-}
+	//if no selected keys, add key on selected properties
+	if (!Duik.utils.layersHaveSelectedKeys(layers))
+	{
+		for (var i=0;i<layers.length;i++)
+		{
+			for (var j=0;j<layers[i].selectedProperties.length;j++)
+			{
+				var prop = layers[i].selectedProperties[j];
+				if (prop.propertyValueType == PropertyValueType.ThreeD_SPATIAL || prop.propertyValueType == PropertyValueType.TwoD_SPATIAL)
+				{
+					var key = prop.addKey(comp.time);
+					prop.setRovingAtKey(key,true);
+				}
+			}
+		}
+		app.endUndoGroup();
+		return;
+	}
 
 
-//for layers
-for (var i=0;i<layers.length;i++)
-{
-//for props
-for (var j=0;j<layers[i].selectedProperties.length;j++)
-{
-var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
-if (prop.canVaryOverTime)
-{
-if (prop.propertyValueType == PropertyValueType.ThreeD_SPATIAL || prop.propertyValueType == PropertyValueType.TwoD_SPATIAL)
-{
-//for keys
-for (var k=0;k<prop.selectedKeys.length;k++)
-{
-prop.setRovingAtKey(prop.selectedKeys[k],true);
-}
-}
-}
-}
-}
+	//for layers
+	for (var i=0;i<layers.length;i++)
+	{
+	//for props
+	for (var j=0;j<layers[i].selectedProperties.length;j++)
+	{
+	var prop = app.project.activeItem.selectedLayers[i].selectedProperties[j];
+	if (prop.canVaryOverTime)
+	{
+	if (prop.propertyValueType == PropertyValueType.ThreeD_SPATIAL || prop.propertyValueType == PropertyValueType.TwoD_SPATIAL)
+	{
+	//for keys
+	for (var k=0;k<prop.selectedKeys.length;k++)
+	{
+	prop.setRovingAtKey(prop.selectedKeys[k],true);
+	}
+	}
+	}
+	}
+	}
+	app.endUndoGroup();
 }
 
 function interpoSpatialLBezButtonClicked() {
@@ -4086,98 +4140,110 @@ fenetrenotes.size = [300,300];
 // MAIN PANEL
 //------------
 {
-var mainGroup = palette.add('group');
-mainGroup.orientation = 'column';
-mainGroup.alignment = ['fill','fill'];
-mainGroup.alignChildren = ['fill','fill'];
+	var mainGroup = palette.add('group');
+	mainGroup.orientation = 'column';
+	mainGroup.alignment = ['fill','fill'];
+	mainGroup.alignChildren = ['fill','fill'];
 
-//HEADER
+	//HEADER
 
-//BUTTONS ON THE RIGHT
-var entete = mainGroup.add('group');
-entete.alignChildren = ['left','center'];
-entete.alignment = ['fill','top'];
-entete.spacing = 2;
-entete.margins = 0;
-var boutonNotes = entete.add('iconbutton',undefined,dossierIcones + 'btn_notes.png');
-boutonNotes.size = [22,22];
-boutonNotes.helpTip = tr("Simple notepad, with auto-save.");
-boutonNotes.onClick = function () { if (fenetrenotes.visible) fenetrenotes.hide(); else fenetrenotes.show(); };
-var boutonCalc = entete.add('iconbutton',undefined,dossierIcones + 'btn_calc.png');
-boutonCalc.size = [22,22];
-boutonCalc.helpTip = tr("Calculator");
-boutonCalc.onClick = function () { if (fenetrecalc.visible) fenetrecalc.hide(); else fenetrecalc.show(); };
+	//BUTTONS ON THE RIGHT
+	var entete = mainGroup.add('group');
+	entete.alignChildren = ['left','center'];
+	entete.alignment = ['fill','top'];
+	entete.spacing = 2;
+	entete.margins = 0;
+	var boutonNotes = entete.add('iconbutton',undefined,dossierIcones + 'btn_notes.png');
+	boutonNotes.size = [22,22];
+	boutonNotes.helpTip = tr("Simple notepad, with auto-save.");
+	boutonNotes.onClick = function () { if (fenetrenotes.visible) fenetrenotes.hide(); else fenetrenotes.show(); };
+	var boutonCalc = entete.add('iconbutton',undefined,dossierIcones + 'btn_calc.png');
+	boutonCalc.size = [22,22];
+	boutonCalc.helpTip = tr("Calculator");
+	boutonCalc.onClick = function () { if (fenetrecalc.visible) fenetrecalc.hide(); else fenetrecalc.show(); };
 
-//PANEL NAME
-if (!expertMode)
-{
-var selectorText = entete.add('statictext',undefined,'');
-selectorText.alignment = ['center','center'];
-selectorText.size = [75,22];
-}
+	//PANEL NAME
+	if (!expertMode)
+	{
+	var selectorText = entete.add('statictext',undefined,'');
+	selectorText.alignment = ['center','center'];
+	selectorText.size = [75,22];
+	}
 
-//SELECTOR BUTTONS
-var selectorGroup = addVGroup(entete);
-selectorGroup.orientation = 'stack';
-selectorGroup.alignment = ['right','center'];
-var selectorButtons = addHGroup(selectorGroup);
-selectorButtons.alignChildren = ['fill','center'];
-var riggingPanelButton = addIconButton(selectorButtons,'sel_rigging.png','');
-riggingPanelButton.size = [22,22];
-riggingPanelButton.helpTip = tr("Rigging");
-var automationPanelButton = addIconButton(selectorButtons,'sel_animation.png','');
-automationPanelButton.size = [22,22];
-automationPanelButton.helpTip = tr("Automation");
-var animationPanelButton = addIconButton(selectorButtons,'sel_interpo.png','');
-animationPanelButton.size = [22,22];
-animationPanelButton.helpTip = tr("Animation");
-var camerasPanelButton = addIconButton(selectorButtons,'sel_camera.png','');
-camerasPanelButton.size = [22,22];
-camerasPanelButton.helpTip = tr("Cameras");
-var settingsPanelButton = addIconButton(selectorButtons,'sel_settings.png','');
-settingsPanelButton.size = [22,22];
-settingsPanelButton.helpTip = tr("Settings");
-var helpPanelButton = addIconButton(selectorButtons,'sel_help.png','');
-helpPanelButton.size = [22,22];
-helpPanelButton.helpTip = tr("Help!");
-//LIST
-var selecteur = selectorGroup.add('dropdownlist',undefined,[tr("Rigging"),tr("Automation"),tr("Animation"),tr("Cameras"),tr("Settings"),tr("Help")]);
-selecteur.alignment = ['right','center'];
-selecteur.helpTip = tr("Tool boxes");
-selecteur.items[0].image = ScriptUI.newImage(dossierIcones + 'sel_rigging.png');
-if (expertMode) selecteur.items[0].text = '';
-selecteur.items[1].image = ScriptUI.newImage(dossierIcones + 'sel_animation.png');
-if (expertMode) selecteur.items[1].text = '';
-selecteur.items[2].image = ScriptUI.newImage(dossierIcones + 'sel_interpo.png');
-if (expertMode) selecteur.items[2].text = '';
-selecteur.items[3].image = ScriptUI.newImage(dossierIcones + 'sel_camera.png');
-if (expertMode) selecteur.items[3].text = '';
-selecteur.items[4].image = ScriptUI.newImage(dossierIcones + 'sel_settings.png');
-if (expertMode) selecteur.items[4].text = '';
-selecteur.items[5].image = ScriptUI.newImage(dossierIcones + 'sel_help.png');
-if (expertMode) selecteur.items[5].text = '';
-if (!eval(app.settings.getSetting('duik', 'dropDownSelector'))) selecteur.hide();
-else selectorButtons.hide();
+	//SELECTOR BUTTONS
+	var selectorGroup = addVGroup(entete);
+	selectorGroup.orientation = 'stack';
+	selectorGroup.alignment = ['right','center'];
+	var selectorButtons = addHGroup(selectorGroup);
+	selectorButtons.alignChildren = ['fill','center'];
+	var riggingPanelButton = addIconButton(selectorButtons,'sel_rigging.png','');
+	riggingPanelButton.size = [22,22];
+	riggingPanelButton.helpTip = tr("Rigging");
+	var automationPanelButton = addIconButton(selectorButtons,'sel_animation.png','');
+	automationPanelButton.size = [22,22];
+	automationPanelButton.helpTip = tr("Automation");
+	var animationPanelButton = addIconButton(selectorButtons,'sel_interpo.png','');
+	animationPanelButton.size = [22,22];
+	animationPanelButton.helpTip = tr("Animation");
+	var camerasPanelButton = addIconButton(selectorButtons,'sel_camera.png','');
+	camerasPanelButton.size = [22,22];
+	camerasPanelButton.helpTip = tr("Cameras");
+	var settingsPanelButton = addIconButton(selectorButtons,'sel_settings.png','');
+	settingsPanelButton.size = [22,22];
+	settingsPanelButton.helpTip = tr("Settings");
+	var helpPanelButton = addIconButton(selectorButtons,'sel_help.png','');
+	helpPanelButton.size = [22,22];
+	helpPanelButton.helpTip = tr("Help!");
+	//LIST
+	var selecteur = selectorGroup.add('dropdownlist',undefined,[tr("Rigging"),tr("Automation"),tr("Animation"),tr("Cameras"),tr("Settings"),tr("Help")]);
+	selecteur.alignment = ['right','center'];
+	selecteur.helpTip = tr("Tool boxes");
+	selecteur.items[0].image = ScriptUI.newImage(dossierIcones + 'sel_rigging.png');
+	if (expertMode) selecteur.items[0].text = '';
+	selecteur.items[1].image = ScriptUI.newImage(dossierIcones + 'sel_animation.png');
+	if (expertMode) selecteur.items[1].text = '';
+	selecteur.items[2].image = ScriptUI.newImage(dossierIcones + 'sel_interpo.png');
+	if (expertMode) selecteur.items[2].text = '';
+	selecteur.items[3].image = ScriptUI.newImage(dossierIcones + 'sel_camera.png');
+	if (expertMode) selecteur.items[3].text = '';
+	selecteur.items[4].image = ScriptUI.newImage(dossierIcones + 'sel_settings.png');
+	if (expertMode) selecteur.items[4].text = '';
+	selecteur.items[5].image = ScriptUI.newImage(dossierIcones + 'sel_help.png');
+	if (expertMode) selecteur.items[5].text = '';
+	if (!eval(app.settings.getSetting('duik', 'dropDownSelector'))) selecteur.hide();
+	else selectorButtons.hide();
 
 
-//les panneaux
-var panos = mainGroup.add('group');
-panos.orientation = 'stack';
-panos.alignChildren = ['fill','fill'];
-panos.maximumSize = [500,500];
-if (!expertMode) panos.minimumSize = [250,250];
-else panos.minimumSize = [100,100];
+	//les panneaux
+	var panos = mainGroup.add('group');
+	panos.orientation = 'stack';
+	panos.alignChildren = ['fill','fill'];
+	panos.maximumSize = [500,500];
+	if (!expertMode) panos.minimumSize = [250,250];
+	else panos.minimumSize = [100,100];
 
-var bottomGroup = addHGroup(mainGroup);
-bottomGroup.alignment = ['fill','bottom'];
-if (!expertMode)
-{
-var duikURL = bottomGroup.add ('statictext',undefined,'www.duduf.net');
-duikURL.alignment = ['left','bottom'];
-}
-bottomGroup.add('image',undefined,dossierIcones + 'small_logo.png');
-var duikText = bottomGroup.add ('statictext',undefined,'Duik ' + version);
-duikText.alignment = ['right','bottom'];
+	var bottomGroup = addHGroup(mainGroup);
+	bottomGroup.alignment = ['fill','bottom'];
+	if (!expertMode)
+	{
+	var duikURL = bottomGroup.add ('statictext',undefined,'www.rainboxprod.coop');
+	duikURL.alignment = ['left','bottom'];
+	}
+	bottomGroup.add('image',undefined,dossierIcones + 'small_logo.png');
+	var duikText = bottomGroup.add ('statictext',undefined,'Duik ' + version);
+	duikText.alignment = ['right','bottom'];
+	
+	//Dev tools
+	if (developper) {
+		mainGroup.add('statictext',undefined,'/!\\ Developper version /!\\');
+		/*var reloadLibDuikButton = mainGroup.add('button',undefined,'libDuik reload');
+		reloadLibDuikButton.onClick = function(){
+			if (typeof Duik === 'object') delete Duik;
+			#include 'libduik.jsxinc'
+			alert('libDuik reloaded');
+		};*/
+	}
+
 }
 
 //------------
@@ -4349,22 +4415,22 @@ selecteur.selection = eval(app.settings.getSetting('duik','pano'));
 helpPanel.alignment = ['fill','top'];
 helpPanel.alignChildren = ['fill','top'];
 helpPanel.add('image',undefined,dossierIcones + 'logo.png');
-var helpURL = helpPanel.add('statictext',undefined,'www.duduf.net');
+var helpURL = helpPanel.add('statictext',undefined,'www.rainboxprod.coop');
 helpURL.alignment = ['center','top'];
 var helpTestGroup = addVPanel(helpPanel);
 helpTestGroup.margins = 10;
-helpTestGroup.add('statictext',undefined,tr("Warning, this is a version for testing purposes only!"));
+/*helpTestGroup.add('statictext',undefined,tr("Warning, this is a version for testing purposes only!"));
 helpTestGroup.add('statictext',undefined,tr("It may or may not be shipped with a lot of bugs."));
 helpTestGroup.add('statictext',undefined,tr("A form is available at http://duiktest.duduf.net"));
-helpTestGroup.add('statictext',undefined,tr("to report bugs or make suggestions!"));
+helpTestGroup.add('statictext',undefined,tr("to report bugs or make suggestions!"));*/
 var helpLinksGroup = addVPanel(helpPanel);
 helpLinksGroup.margins = 10;
 helpLinksGroup.add('statictext',undefined,tr("If you need help using Duik,"));
 helpLinksGroup.add('statictext',undefined,tr("those resources can be useful:"));
-helpTrainingURL = helpLinksGroup.add('statictext',undefined,'• ' + tr("Duduf Training, documents and tutorials:"));
-helpTrainingURL = helpLinksGroup.add('statictext',undefined,'www.duduf.training');
-helpForumURL = helpLinksGroup.add('statictext',undefined,'• ' + tr("Duduf Forum, where you can ask your questions:"));
-helpForumURL = helpLinksGroup.add('statictext',undefined,'forum.duduf.com');
+/*helpTrainingURL = helpLinksGroup.add('statictext',undefined,'• ' + tr("Duduf Training, documents and tutorials:"));
+helpTrainingURL = helpLinksGroup.add('statictext',undefined,'www.duduf.training');*/
+helpForumURL = helpLinksGroup.add('statictext',undefined,'• ' + tr("Rainbox Forum, where you can ask your questions:"));
+helpForumURL = helpLinksGroup.add('statictext',undefined,'forum.rainboxprod.coop');
 var helpLicenseGroup = addVPanel(helpPanel);
 helpLicenseGroup.margins = 10;
 helpLicenseGroup.add('statictext',undefined,tr("License: Duik is free software,"));
@@ -5962,6 +6028,8 @@ celOnionInOpacitySlider.onChanging = function() { celOnionInOpacityEdit.text = p
 celOnionInOpacitySlider.onChange = celOnionUpdateButtonClicked;
 celOnionInOpacityEdit.onChange = function() { celOnionInOpacitySlider.value = parseInt(celOnionInOpacityEdit.text); celOnionUpdateButtonClicked(); };
 celOnionInOpacityButton.onClick = function() {
+celOnionButton.value = false;
+celOnionUpdateButtonClicked();
 celOnionInOpacitySlider.enabled = celOnionInOpacityButton.value;
 celOnionInOpacityEdit.enabled = celOnionInOpacityButton.value;
 if (!celOnionInOpacityButton.value && !celOnionOutOpacityButton.value )
@@ -5970,7 +6038,7 @@ celOnionOutOpacityButton.value = true;
 celOnionOutOpacitySlider.enabled = true;
 celOnionOutOpacityEdit.enabled = true;
 }
-
+celOnionButton.value = true;
 celOnionUpdateButtonClicked();
 };
 
@@ -5988,6 +6056,8 @@ celOnionOutOpacitySlider.onChanging = function() { celOnionOutOpacityEdit.text =
 celOnionOutOpacitySlider.onChange = celOnionUpdateButtonClicked;
 celOnionOutOpacityEdit.onChange = function() { celOnionOutOpacitySlider.value = parseInt(celOnionOutOpacityEdit.text); celOnionUpdateButtonClicked(); };
 celOnionOutOpacityButton.onClick = function() {
+celOnionButton.value = false;
+celOnionUpdateButtonClicked();
 celOnionOutOpacitySlider.enabled = celOnionOutOpacityButton.value;
 celOnionOutOpacityEdit.enabled = celOnionOutOpacityButton.value;
 if (!celOnionInOpacityButton.value && !celOnionOutOpacityButton.value )
@@ -5996,6 +6066,7 @@ celOnionInOpacityButton.value = true;
 celOnionInOpacitySlider.enabled = true;
 celOnionInOpacityEdit.enabled = true;
 }
+celOnionButton.value = true;
 celOnionUpdateButtonClicked();
 };
 
